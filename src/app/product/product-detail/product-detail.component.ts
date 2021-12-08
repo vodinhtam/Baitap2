@@ -25,7 +25,7 @@ export class ProductDetailComponent implements OnInit {
   onAddToList() {
     this.cartService.addItem(new ListItem(this.selectedItem, this.selectedQuantity))
     
-    // confirm('Added to list ' + this.selectedQuantity + ' item"' + this.selectedItem.name + '"')
+    alert('Added to list ' + this.selectedQuantity + ' item"' + this.selectedItem.name + '"')
 
     this.selectedQuantity = 0;
   }

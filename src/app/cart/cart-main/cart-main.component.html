@@ -11,7 +11,7 @@
       <strong class="text-info">{{i+1}}</strong>: --{{item.product.name}}--:  
       {{item.product.price | currency:'VND'}}
       <strong class="text-danger">x</strong> ({{item.quantity}})
-      => {{(item.quantity * item.product.price) | currency:'VND'}}
+      = {{(item.quantity * item.product.price) | currency:'VND'}}
       <span class="my-remove-item" (click)="onRemoveItem(item)">Remove</span>
     </h3>
 </ul>

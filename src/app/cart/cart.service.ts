@@ -1,18 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Cart } from './cart.model';
-import { ProductService } from '../product/product.service';
 import { ListItem } from '../shared/list-item.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService{
-  product1 = this.productService.getProduct('T1')
-  product2 = this.productService.getProduct('P2')
 
-  cart = new Cart('1', [new ListItem(this.product1, 2), new ListItem(this.product2, 1)])
+  cart = new Cart('1', [])
 
-  constructor(private productService: ProductService){}
+  constructor(){}
 
   getToTalPrice(){
     let totalPrice: number = 0;

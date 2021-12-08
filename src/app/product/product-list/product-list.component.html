@@ -24,7 +24,18 @@
           <img src="{{item.imgUrl}}" alt="{{item.name}}" height="120px">
         </div>
         <hr>
-        <h4 class="text-center">Price: {{item.price | currency:'VND'}}</h4>
+        <h5 class="text-center my-3">Price: {{item.price | currency:'VND'}}</h5>
+        <!-- component? -->
+        <app-select-quantity [product]="item"></app-select-quantity>
+        <!-- <div class="row px-3 pb-2">
+          <div class="col-7">
+            <input type="number" min="1" class="form-control w-100" value="1" #qty>
+          </div>
+          <div class="col-5">
+            <button class="btn btn-danger w-100" (click)="onAddItem(item, qty.value)">Add</button>
+          </div>
+        </div> -->
+        
       </div>
     </div>
   </div>

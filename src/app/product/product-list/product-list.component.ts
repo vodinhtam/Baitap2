@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { CartService } from '../../cart/cart.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ListItem } from 'src/app/shared/list-item.model';
 
 @Component({
   selector: 'app-product-list',
@@ -19,13 +20,13 @@ export class ProductListComponent implements OnInit {
     this.products = this.productService.products;
   }
 
-  onAddProduct(id: string, quantity: string){
+  onAddProduct(id: string, quantity: string) {
     let product = this.productService.getProduct(id)
 
-    this.cartService.addItem({product: product, quantity: +quantity})
+    this.cartService.addItem({ product: product, quantity: +quantity })
   }
-  
-  onFilterProduct(value: string){
+
+  onFilterProduct(value: string) {
     this.products = this.productService.products;
     if (value === 'p') {
       this.products = this.products.filter(x => x.category === 'Phone')
@@ -40,11 +41,16 @@ export class ProductListComponent implements OnInit {
       this.products = this.products.filter(x => x.category === 'SmartWatch')
     }
   }
-  
-  onSelectItem(item: Product, content:any){
+
+  onSelectItem(item: Product, content: any) {
     this.selectedItem = item
 
     //open modal
     this.ngbModal.open(content);
   }
+
+  // onAddItem(item: Product, qty: string) {
+  //   this.cartService.addItem(new ListItem(item, (+qty)))
+  //   alert('Added to list ' + qty + ' item"' + item.name + '"')
+  // }
 }
