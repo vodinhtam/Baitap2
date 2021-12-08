@@ -1,0 +1,10 @@
+.my-remove-item{
+    font-size: medium;
+    color: red;
+    margin-left: 15px;
+}
+.my-remove-item:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    color: rgb(59, 137, 240);
+}   

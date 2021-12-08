@@ -1,0 +1,12 @@
+.my-item-name:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    color: brown;
+}
+.card{
+    border: none;
+}
+.my-card-body{
+    border: solid 2px rgb(245, 72, 72);
+    border-radius: 5px;
+}
