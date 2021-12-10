@@ -13,7 +13,7 @@ export class ProductService {
     new Product('P4', 'Điện thoại Vivo X70 Pro 5G', 'Phone', 'https://cdn.tgdd.vn/Products/Images/42/248099/vivo-x70-pro-xanh-1-1.jpg', 18990000),
     new Product('L1', 'Acer Nitro 5 Gaming AN515', 'Laptop', 'https://cdn.tgdd.vn/Products/Images/44/247243/acer-nitro-5-gaming-an515-57-727j-i7-nhqd9sv005-4.jpg', 28190000),
     new Product('L2', 'MacBook Pro 14 M1 Pro 2021', 'Laptop', 'https://cdn.tgdd.vn/Products/Images/44/253581/Slider/vi-vn-apple-pro-14-m1-pro-2021-8-core-cpu-16gb-1.jpg', 52990000),
-    new Product('L3', 'MSI Katana Gaming GF66 11UC i7', 'Laptop', 'https://cdn.tgdd.vn/Products/Images/44/242201/Slider/vi-vn-msi-gf66-11uc-i7-224vn.jpg', 28290000),
+    new Product('L3', 'MSI Katana Gaming GF66', 'Laptop', 'https://cdn.tgdd.vn/Products/Images/44/242201/Slider/vi-vn-msi-gf66-11uc-i7-224vn.jpg', 28290000),
     new Product('T1', 'iPad Pro M1 12.9 inch', 'Tablet', 'https://cdn.tgdd.vn/Products/Images/522/238649/Slider/ipad-pro-m1-129-inch-wifi-cellular-128gb-2021-240521-03505210.jpg', 36490000),
     new Product('T2', 'Samsung Galaxy Tab S7', 'Tablet', 'https://cdn.tgdd.vn/Products/Images/522/225031/Slider/-samsung-galaxy-tab-s7-1z.jpg', 18990000),
     new Product('T3', 'Huawei MatePad 11', 'Tablet', 'https://cdn.tgdd.vn/Products/Images/522/241299/Slider/huawei-matepad-11-tinhnang-1020x570.jpg', 13990000),

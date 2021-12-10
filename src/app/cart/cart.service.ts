@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Cart } from './cart.model';
 import { ListItem } from '../shared/list-item.model';
+import { ifStmt } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,18 @@ export class CartService{
       numberOfItems += itemList.quantity
     });
     return numberOfItems;
+  }
+
+  changeQuantity(item: ListItem, status: boolean){
+    if(status){
+      item.quantity++
+    } else {
+      if (item.quantity > 1) {
+        item.quantity--
+      } else {
+        this.removeItem(item)
+      }
+    }
   }
 
 }

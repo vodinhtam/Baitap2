@@ -1,0 +1,12 @@
+input.ng-invalid.ng-touched{
+    border: solid 1px red;
+}
+
+#login-form{
+width: 600px;
+margin: 50px auto;
+border: solid 2px rgb(146, 146, 209);
+padding: 50px 0px;
+border-radius: 20px;
+background-color: antiquewhite;
+}

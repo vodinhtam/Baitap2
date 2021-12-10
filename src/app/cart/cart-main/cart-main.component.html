@@ -1,28 +1,69 @@
-<div class="row alert alert-success">
-  <div class="col-12">
-    <h2 class="text-center">
-      CART'S LIST ITEM
-    </h2>
+<div class="container mt-3">
+  <div class="row alert alert-success">
+    <div class="col-12">
+      <h2 class="text-center">
+        CART'S LIST ITEM
+      </h2>
+    </div>
   </div>
+  <ng-container *ngIf="cart.items.length !== 0; else noProduct">
+    <div class="col-12">
+      <table class="table table-striped">
+        <thead class="thead-inverse">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>SubTotal</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          <tr *ngFor="let item of cart.items; let i = index">
+            <td>
+              {{i+1}}
+            </td>
+            <td>
+              {{item.product.name}}
+            </td>
+            <td>
+              <img src="{{item.product.imgUrl}}" alt="{{item.product.name}}" height="50px">
+            </td>
+            <td>
+              {{item.product.price | vndCurrency}}
+            </td>
+            <td>
+              <a type="button" (click)="onChangeQuantity(item, false)"><fa-icon [icon]="minusIcon"></fa-icon></a>
+              {{item.quantity}}
+              <a type="button" (click)="onChangeQuantity(item, true)"><fa-icon [icon]="plusIcon"></fa-icon></a>
+            </td>
+            <td>
+              {{(item.quantity * item.product.price) | vndCurrency}}
+            </td>
+            <td>
+              <button class="btn btn-danger " (click)="onRemoveItem(item)">Delete</button>
+            </td>
+          </tr>
+          <tr class="mt-2">
+            <td colspan="4">
+              <h3>Total:</h3>
+            </td>
+            <td colspan="3">
+              <h3>{{ totalPrice | vndCurrency }}</h3>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </ng-container>
+
+  <ng-template #noProduct>
+    <div class="alert alert-primary" role="alert">
+      <h4 class="alert-heading">There's no product in the list!</h4>
+    </div>
+  </ng-template>
+  <br>
 </div>
-<ng-container *ngIf="cart.items.length !== 0; else noProduct">
-  <ul class="list-group" *ngFor="let item of cart.items; let i = index">
-    <h3 class="text-primary list-group-item">
-      <strong class="text-info">{{i+1}}</strong>: --{{item.product.name}}--:  
-      {{item.product.price | currency:'VND'}}
-      <strong class="text-danger">x</strong> ({{item.quantity}})
-      = {{(item.quantity * item.product.price) | currency:'VND'}}
-      <span class="my-remove-item" (click)="onRemoveItem(item)">Remove</span>
-    </h3>
-</ul>
-<h2>Total: {{ totalPrice | currency: 'VND' }}</h2>
-</ng-container>
-
-<ng-template #noProduct>
-  <div class="alert alert-primary" role="alert">
-    <h4 class="alert-heading">There's no product in the list!</h4>
-  </div>
-</ng-template>
-
-<button type="button" class="btn btn-info mt-4" routerLink="/product-list">Back to list</button>
-<br>

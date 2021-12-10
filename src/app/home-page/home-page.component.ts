@@ -1,20 +1,29 @@
-import { Component, OnInit} from '@angular/core';
-import { Cart } from '../cart/cart.model';
-import { CartService } from '../cart/cart.service';
+import { Component, OnInit, DoCheck } from '@angular/core';
+import { AccountService } from '../shared/account.service';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent implements OnInit{
-  cart: Cart;
-  totalPrice: number;
+export class HomePageComponent implements OnInit, DoCheck{
+  categorySelected: string;
+  listOrCart = 'list';
+  loginUser: string;
 
-  constructor(private cartService: CartService) { }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
-    this.cart = this.cartService.cart;
+  }
+  
+  ngDoCheck(): void {
+    this.loginUser = localStorage.getItem('loginAccount')
+  }
+  
+  doLogOut(e: boolean){
+    if(e){
+      this.accountService.logOut()
+    }
   }
 
 }

@@ -1,3 +1,16 @@
-<div class="d-flex justify-content-center">
-    <img src="./../../assets/homebackground.jpg" alt="" height="720px" width="90%">
+<app-nav-bar 
+    (categorySelected)="categorySelected = $event" 
+    (listOrCart)="listOrCart = $event"
+    (isLogOut)="doLogOut($event)"
+    [loginUser]="loginUser"
+></app-nav-bar>
+
+
+<div class="container mt-2">
+    <ng-container *ngIf="listOrCart === 'list'">
+        <app-product-list [categorySelected]=categorySelected ></app-product-list>
+    </ng-container>
+    <ng-container *ngIf="listOrCart === 'cart'">
+        <app-cart-main></app-cart-main>
+    </ng-container>
 </div>

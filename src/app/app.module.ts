@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JwPaginationModule } from 'jw-angular-pagination';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HomePageComponent } from './home-page/home-page.component';
 import { ProductMainComponent } from './product/product-main/product-main.component';
@@ -15,6 +15,8 @@ import { ProductListComponent } from './product/product-list/product-list.compon
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { SelectQuantityComponent } from './shared/select-quantity/select-quantity.component';
+import { LoginComponent } from './login/login.component';
+import { VndCurrencyPipe } from './pipes/vnd-currency.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { SelectQuantityComponent } from './shared/select-quantity/select-quantit
     ProductListComponent,
     NavBarComponent,
     ProductDetailComponent,
-    SelectQuantityComponent
+    SelectQuantityComponent,
+    LoginComponent,
+    VndCurrencyPipe
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,8 @@ import { SelectQuantityComponent } from './shared/select-quantity/select-quantit
     NgbModule,
     FontAwesomeModule,
     JwPaginationModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

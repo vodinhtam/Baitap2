@@ -2,17 +2,44 @@
   <a class="navbar-brand" href="#">Logo Here</a>
   <div class="collapse navbar-collapse">
     <div class="nav nav-pills">
-      <a class="nav-link" routerLinkActive="active" routerLink="/index">Home</a>
-      <a class="nav-link" routerLinkActive="active" routerLink="/product-list">All Product</a>
-
-
+      <button class="btn btn-outline-primary" (click)="onSelectCategory('all')">Home</button>
+      
+      <div #myDrop="ngbDropdown" ngbDropdown class="d-inline-block ml-3">
+        <button 
+          class="btn btn-outline-primary nav-link" 
+          id="cat-select"
+          (mouseenter)="$event.stopPropagation(); myDrop.open();">
+          Category
+        </button>
+        <div ngbDropdownMenu aria-labelledby="cat-select">
+          <button ngbDropdownItem (click)="onSelectCategory('p')">Phone</button>
+          <button ngbDropdownItem (click)="onSelectCategory('t')">Tablet</button>
+          <button ngbDropdownItem (click)="onSelectCategory('l')">Laptop</button>
+          <button ngbDropdownItem (click)="onSelectCategory('sw')">SmartWatch</button>
+        </div>
+      </div>
     </div>
-    <ul class="nav nav-pills ml-auto">
-      <button type="button" class="btn btn-info" routerLinkActive="active" routerLink="/cart">
+    
+    <ul class="nav nav-pills ml-auto" >
+      <ng-container *ngIf="numberOfItems > 0">
+        <button type="button" class="btn btn-info" (click)="onSelectCart()">
         <fa-icon [icon]="cartIcon"></fa-icon>
-        <span class='badge badge-warning' id='lblCartCount'> {{ numberOfItems }} </span>
-        View List
+        <span class="ml-2"> <u>{{ numberOfItems }}</u> </span>
       </button>
+      </ng-container>
+      <ng-container *ngIf="!loginUser; else hasLoggedin">
+        <button class="btn btn-outline-primary ml-3" routerLinkActive="active" routerLink="/login">
+          Login</button>
+      </ng-container>
     </ul>
   </div>
 </nav>
+<ng-template #hasLoggedin>
+  <h4 class="text-info pt-2 ml-3">
+    Welcome {{loginUser}}
+    <a class="small font-italic font-weight-bolder text-danger mt-2" 
+      style="cursor: pointer;"
+      (click)="onLogOut()"
+    > Logout</a>
+  </h4>
+</ng-template>
