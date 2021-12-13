@@ -35,7 +35,6 @@ export class CartMainComponent implements OnInit, DoCheck {
       }
     }
     this.cartService.changeQuantity(item, status);
-
   }
 
 }

@@ -1,16 +1,14 @@
 <app-nav-bar 
-    (categorySelected)="categorySelected = $event" 
-    (listOrCart)="listOrCart = $event"
-    (isLogOut)="doLogOut($event)"
+    (displayContent)="displayContent = $event"
     [loginUser]="loginUser"
 ></app-nav-bar>
 
 
 <div class="container mt-2">
-    <ng-container *ngIf="listOrCart === 'list'">
+    <ng-container *ngIf="displayContent === 'list'">
         <app-product-list [categorySelected]=categorySelected ></app-product-list>
     </ng-container>
-    <ng-container *ngIf="listOrCart === 'cart'">
+    <ng-container *ngIf="displayContent === 'cart'">
         <app-cart-main></app-cart-main>
     </ng-container>
 </div>

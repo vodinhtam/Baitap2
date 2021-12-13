@@ -1,29 +1,28 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AccountService } from '../shared/account.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent implements OnInit, DoCheck{
+export class HomePageComponent implements OnInit, OnDestroy{
   categorySelected: string;
-  listOrCart = 'list';
+  displayContent = 'list';
   loginUser: string;
+
+  subscription: Subscription;
 
   constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
+    this.subscription = this.accountService.loginUser$.subscribe((data) => {this.loginUser = data})
+    
   }
-  
-  ngDoCheck(): void {
-    this.loginUser = localStorage.getItem('loginAccount')
-  }
-  
-  doLogOut(e: boolean){
-    if(e){
-      this.accountService.logOut()
-    }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

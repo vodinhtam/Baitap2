@@ -1,25 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Cart } from './cart.model';
 import { ListItem } from '../shared/list-item.model';
-import { ifStmt } from '@angular/compiler/src/output/output_ast';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService{
-
   cart = new Cart('1', [])
+
+  public sumItems$ = new BehaviorSubject<number>(0);
 
   constructor(){}
 
   getToTalPrice(){
-    let totalPrice: number = 0;
-
-    this.cart.items.forEach(product => {
-      totalPrice += (product.quantity * product.product.price)
-    });
-
-    return totalPrice;
+    return this.cart.items.reduce((x, item) => x + (item.quantity * item.product.price),0)
   }
 
   addItem(listItem: ListItem){
@@ -30,18 +25,15 @@ export class CartService{
     } else {
       this.cart.items.push(listItem);
     }
+    
+    this.sumItems$.next(this.cart.items.reduce((x, {quantity}) => x + quantity, 0))
   }
 
+  //filter condition should be Id, not the whole item (x.id !== item.id)
   removeItem(item: ListItem){
-    this.cart.items = this.cart.items.filter(x => x !== item);
-  }
+    this.cart.items = this.cart.items.filter(x => x.product.id !== item.product.id);
 
-  getNumberOfItems(){
-    let numberOfItems = 0;
-    this.cart.items.forEach(itemList => {
-      numberOfItems += itemList.quantity
-    });
-    return numberOfItems;
+    this.sumItems$.next(this.cart.items.reduce((x, {quantity}) => x + quantity, 0))
   }
 
   changeQuantity(item: ListItem, status: boolean){
@@ -54,6 +46,8 @@ export class CartService{
         this.removeItem(item)
       }
     }
+
+    this.sumItems$.next(this.cart.items.reduce((x, {quantity}) => x + quantity, 0))
   }
 
 }

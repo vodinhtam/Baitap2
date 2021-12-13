@@ -13,10 +13,11 @@ import { ProductMainComponent } from './product/product-main/product-main.compon
 import { CartMainComponent } from './cart/cart-main/cart-main.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { SelectQuantityComponent } from './shared/select-quantity/select-quantity.component';
 import { LoginComponent } from './login/login.component';
 import { VndCurrencyPipe } from './pipes/vnd-currency.pipe';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { CreateProductComponent } from './create-product/create-product.component';
 
 @NgModule({
   declarations: [
@@ -26,10 +27,11 @@ import { VndCurrencyPipe } from './pipes/vnd-currency.pipe';
     CartMainComponent,
     ProductListComponent,
     NavBarComponent,
-    ProductDetailComponent,
     SelectQuantityComponent,
     LoginComponent,
-    VndCurrencyPipe
+    VndCurrencyPipe,
+    AdminPanelComponent,
+    CreateProductComponent
   ],
   imports: [
     BrowserModule,

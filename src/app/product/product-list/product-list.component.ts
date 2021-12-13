@@ -1,39 +1,25 @@
 import { Product } from './../product.model';
-import { Component, OnInit, DoCheck, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ProductService } from '../product.service';
 import { CartService } from '../../cart/cart.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit, DoCheck {
+export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[];
   selectedItem: Product;
   @Input() categorySelected: string;
 
-  constructor(private productService: ProductService, private cartService: CartService, private ngbModal: NgbModal) { }
+  subscription: Subscription;
+
+  constructor(private productService: ProductService, private cartService: CartService) { }
 
   ngOnInit(): void {
-    this.products = this.productService.products;
-  }
-
-  ngDoCheck(): void {
-    this.products = this.productService.products;
-    if (this.categorySelected === 'p') {
-      this.products = this.products.filter(x => x.category === 'Phone')
-    }
-    if (this.categorySelected === 't') {
-      this.products = this.products.filter(x => x.category === 'Tablet')
-    }
-    if (this.categorySelected === 'l') {
-      this.products = this.products.filter(x => x.category === 'Laptop')
-    }
-    if (this.categorySelected === 'sw') {
-      this.products = this.products.filter(x => x.category === 'SmartWatch')
-    }
+    this.subscription = this.productService.products$.subscribe((data) => this.products = data)
   }
 
   onAddProduct(id: string, quantity: string) {
@@ -42,15 +28,7 @@ export class ProductListComponent implements OnInit, DoCheck {
     this.cartService.addItem({ product: product, quantity: +quantity })
   }
 
-  onSelectItem(item: Product, content: any) {
-    this.selectedItem = item
-
-    //open modal
-    this.ngbModal.open(content);
+  ngOnDestroy(): void {
+      this.subscription.unsubscribe()
   }
-
-  // onAddItem(item: Product, qty: string) {
-  //   this.cartService.addItem(new ListItem(item, (+qty)))
-  //   alert('Added to list ' + qty + ' item"' + item.name + '"')
-  // }
 }

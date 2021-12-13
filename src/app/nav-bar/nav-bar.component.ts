@@ -1,44 +1,46 @@
-import { Component, OnInit, DoCheck, Output, EventEmitter, Input } from '@angular/core';
+import { AccountService } from './../shared/account.service';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { CartService } from '../cart/cart.service';
+import { Subscription } from 'rxjs';
+import { ProductService } from '../product/product.service';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent implements OnInit, DoCheck {
+export class NavBarComponent implements OnInit, OnDestroy {
   cartIcon = faCartPlus;
-  numberOfItems: number = 0;
+  numberOfItems = 0;
+  subscription: Subscription;
   
-  @Output() categorySelected = new EventEmitter<string>()
-  @Output() listOrCart = new EventEmitter<string>()
-  @Output() isLogOut = new EventEmitter<boolean>()
+  @Output() displayContent = new EventEmitter<string>()
 
   @Input() loginUser: string;
 
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private productService: ProductService, private accService: AccountService) { }
 
   ngOnInit(): void {
+    this.subscription = this.cartService.sumItems$.subscribe((x) => {this.numberOfItems = x})
   }
-  
-  ngDoCheck(): void {
-    this.numberOfItems = this.cartService.getNumberOfItems() 
+
+  ngOnDestroy(): void {
+      this.subscription.unsubscribe();
   }
 
   onSelectCategory(category: string){
-    this.categorySelected.emit(category)
-    this.listOrCart.emit('list')
+    this.displayContent.emit('list')
+    this.productService.filterCategory(category);
   }
 
   onSelectCart(){
-    this.listOrCart.emit('cart')
+    this.displayContent.emit('cart')
   }
 
   onLogOut(){
-    this.isLogOut.emit(true)
-    
+    this.accService.logOut();
   }
 
 }

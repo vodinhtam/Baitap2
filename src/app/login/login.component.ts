@@ -28,11 +28,9 @@ export class LoginComponent implements OnInit {
     } else {
       let data = this.myForm.getRawValue();
   
-      if (this.accountService.checkAndPerformLogin(data.username, data.password)) {
-        this.router.navigate(['/index']);
-      } else {
+      if (!this.accountService.checkAndPerformLogin(data.username, data.password)) {
         this.loginErr = "Fail to login, please check your input!"
-      }
+      } 
     }
   }
 
