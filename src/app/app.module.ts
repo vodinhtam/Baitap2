@@ -8,22 +8,23 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JwPaginationModule } from 'jw-angular-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { HomePageComponent } from './home-page/home-page.component';
-import { ProductMainComponent } from './product/product-main/product-main.component';
-import { CartMainComponent } from './cart/cart-main/cart-main.component';
-import { ProductListComponent } from './product/product-list/product-list.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { HomePageComponent } from './component/home-page/home-page.component';
+import { ProductListCategoryComponent } from './component/product/product-list-category/product-list-category.component';
+import { CartMainComponent } from './component/cart-main/cart-main.component';
+import { ProductListComponent } from './component/product/product-list/product-list.component';
+import { NavBarComponent } from './component/nav-bar/nav-bar.component';
 import { SelectQuantityComponent } from './shared/select-quantity/select-quantity.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './component/login/login.component';
 import { VndCurrencyPipe } from './pipes/vnd-currency.pipe';
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { CreateProductComponent } from './create-product/create-product.component';
+import { AdminPanelComponent } from './component/admin/admin-panel/admin-panel.component';
+import { CreateProductComponent } from './component/admin/create-product/create-product.component';
+import { ShortenTextPipe } from './pipes/shorten-text.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    ProductMainComponent,
+    ProductListCategoryComponent,
     CartMainComponent,
     ProductListComponent,
     NavBarComponent,
@@ -31,7 +32,8 @@ import { CreateProductComponent } from './create-product/create-product.componen
     LoginComponent,
     VndCurrencyPipe,
     AdminPanelComponent,
-    CreateProductComponent
+    CreateProductComponent,
+    ShortenTextPipe
   ],
   imports: [
     BrowserModule,

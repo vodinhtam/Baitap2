@@ -1,0 +1,44 @@
+<div class="row alert alert-success">
+  <div class="col-12">
+    <h2 class="text-center">
+      PRODUCTS LIST
+    </h2>
+  </div>
+</div>
+<ng-container *ngIf="!categorySelected; else hasCategorySelected">
+  <ng-container *ngFor="let key of keySets">
+    <hr>
+    <div class="col-4" style="border: 1px solid red; border-bottom: none; margin-bottom: 0px;">
+      <div class="row alert alert-danger">
+        <div class="col-12">
+          <h3>
+            {{key}}
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="border: 1px solid red;">
+      <div class="col-4 card" *ngFor="let product of mappedProducts[key]">
+        <div class="card-body">
+          <div class="my-card-body">
+            <div class="alert alert-primary text-center" role="alert" [style.height]="'80px'">
+              <h4 class="alert-heading my-item-name">{{product.name}}</h4>
+            </div>
+            <div class="text-center">
+              <img src="{{product.imgUrl}}" alt="{{product.name}}" height="120px">
+            </div>
+            <hr>
+            <h5 class="text-center my-3">Price: {{product.price | vndCurrency}}</h5>
+            <app-select-quantity [product]="product"></app-select-quantity>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #hasCategorySelected>
+  <app-product-list-category [category]="categorySelected">
+  </app-product-list-category>
+</ng-template>
+<br>

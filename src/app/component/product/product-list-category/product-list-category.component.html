@@ -1,0 +1,28 @@
+<hr>
+    <div class="col-4" style="border: 1px solid red; border-bottom: none; margin-bottom: 0px;">
+      <div class="row alert alert-danger">
+        <div class="col-12">
+          <h3>
+            {{category}}
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="border: 1px solid red;">
+      <div class="col-4 card" *ngFor="let item of products">
+        <div class="card-body">
+          <div class="my-card-body">
+            <div class="alert alert-primary text-center" role="alert" [style.height]="'80px'">
+              <h4 class="alert-heading my-item-name">{{item.name}}</h4>
+            </div>
+            <div class="text-center">
+              <img src="{{item.imgUrl}}" alt="{{item.name}}" height="120px">
+            </div>
+            <hr>
+            <h5 class="text-center my-3">Price: {{item.price | vndCurrency}}</h5>
+            <app-select-quantity [product]="item"></app-select-quantity>
+
+          </div>
+        </div>
+      </div>
+    </div>

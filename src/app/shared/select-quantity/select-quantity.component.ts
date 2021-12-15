@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
-import { CartService } from '../../cart/cart.service';
-import { Product } from '../../product/product.model';
-import { ListItem } from '../list-item.model';
+import { CartService } from '../../service/cart.service';
+import { Product } from '../../model/product.model';
+import { ListItem } from '../../model/list-item.model';
 
 @Component({
   selector: 'app-select-quantity',
@@ -33,7 +33,7 @@ export class SelectQuantityComponent implements OnInit {
 
   onAddItem(){
     this.cartService.addItem(new ListItem(this.product, this.quantity))
-    alert('Added to list ' + this.quantity + ' item"' + this.product.name + '"')
+    // alert('Added to list ' + this.quantity + ' item"' + this.product.name + '"')
     this.quantity = 1
   }
 

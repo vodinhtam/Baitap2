@@ -1,0 +1,54 @@
+<ng-container *ngIf="loginUser!== undefined && loginUser.isAdmin; else elseBlock">
+  <div class="container mt-3">
+    <button type="button" class="btn btn-outline-info" routerLink="/index">
+      View Home-page
+    </button>
+    <hr>
+    <button type="button" class="btn btn-outline-info" routerLink="/create-product">Create new product</button>
+    <hr>
+    <button type="button" class="btn btn-outline-info" (click)="onToggleViewList()">
+      {{!viewListToggle ? 'Show Product List' : 'Hide Product List'}}
+    </button>
+    <hr>
+
+    <ng-container *ngIf="viewListToggle">
+      <div *ngFor="let category of objectKey(mappedProducts)">
+        <div class="alert alert-primary col-md-3" role="alert">
+          <h3>{{category}}</h3>
+        </div>
+        <table class="table table-light">
+          <thead class="thead-light">
+            <tr>
+              <th class="col-1">#</th>
+              <th class="col-2">Id</th>
+              <th class="col-4">Name</th>
+              <th class="col-3">Price</th>
+              <th class="col-2">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of mappedProducts[category]; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{product.id}}</td>
+              <td>{{product.name}}</td>
+              <td>{{product.price}}</td>
+              <td>
+                <button type="button" class="btn btn-danger" (click)="onRemoveProduct(product.id)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
+
+
+<ng-template #elseBlock>
+  <div class="container justify-content-center mt-4">
+      <h2 class="my-4">Sorry! This page can only be accessed by administrator!</h2>
+  <button type="button" class="btn btn-primary" routerLink="/index">Back to home page</button>
+  </div>
+</ng-template>

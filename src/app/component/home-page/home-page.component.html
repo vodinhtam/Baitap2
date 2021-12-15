@@ -1,0 +1,17 @@
+<app-nav-bar 
+    (displayContent)="displayContent = $event"
+    (categorySelected)="categorySelected = $event"
+    [loginUser]="loginUser"
+></app-nav-bar>
+
+
+<div class="container mt-2">
+    <ng-container *ngIf="displayContent === 'list'">
+        <app-product-list [categorySelected]=categorySelected ></app-product-list>
+    </ng-container>
+    <ng-container *ngIf="displayContent === 'cart'">
+        <app-cart-main></app-cart-main>
+    </ng-container>
+</div>
+
+
