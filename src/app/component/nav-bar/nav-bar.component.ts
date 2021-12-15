@@ -32,9 +32,11 @@ export class NavBarComponent implements OnInit, OnDestroy {
   constructor(private cartService: CartService, private accService: AccountService) { }
 
   ngOnInit(): void {
-    this.subscription.add(this.cartService.sumItems$.subscribe((sumItems) => { this.numberOfItems = sumItems }));
-    this.subscription.add(this.cartService.cart$.subscribe((cart) => { this.cart = cart }));
-    this.subscription.add(this.cartService.sumPrice$.subscribe((sumPrice) => { this.sumPrice = sumPrice }));
+    this.subscription.add(this.cartService.cart$.subscribe((cart) => {
+      this.cart = cart
+      this.numberOfItems = this.cartService.getSumItem(cart);
+      this.sumPrice = this.cartService.getSumPrice(cart); 
+    }));
   }
 
   ngOnDestroy(): void {

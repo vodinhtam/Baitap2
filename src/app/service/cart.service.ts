@@ -1,68 +1,66 @@
 import { Injectable } from '@angular/core';
 import { Cart } from '../model/cart.model';
 import { ListItem } from '../model/list-item.model';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CartService{
+export class CartService {
   cart = new Cart('1', [])
 
-  //sử dụng để thao tác cho các method bên dưới - thay thế luôn cho sumItem
   public cart$ = new BehaviorSubject<Cart>(this.cart);
-  public sumItems$ = new BehaviorSubject<number>(0);
-  public sumPrice$ = new BehaviorSubject<number>(0);
 
-  constructor(){}
+  constructor() { }
 
-  getCart(){
+  getCart() {
     return this.cart$.getValue();
   }
-  updateToTalPrice(){
-    this.sumPrice$.next(this.getCart().items.reduce((x, item) => x + (item.quantity * item.product.price),0)) 
+  getSumPrice(cart: Cart) {
+    return cart.items.reduce((x, item) => x + (item.quantity * item.product.price), 0);
   }
 
-  updateToTalItems(){
-    this.sumItems$.next(this.getCart().items.reduce((x, {quantity}) => x + quantity, 0))
+  getSumItem(cart: Cart) {
+    return cart.items.reduce((x, { quantity }) => x + quantity, 0)
   }
 
-  addItem(listItem: ListItem){
+  addItem(listItem: ListItem) {
     let cart = this.getCart();
     let itemFound = cart.items.find(x => x.product.id === listItem.product.id)
-    
-    if(itemFound){
+
+    if (itemFound) {
       itemFound.quantity += listItem.quantity
     } else {
       this.cart.items.push(listItem);
     }
 
-    this.cart$.next(cart)
-    this.updateToTalItems()
-    this.updateToTalPrice()
+    this.cart$.next(cart);
   }
 
-  //filter condition should be Id, not the whole item (x.id !== item.id)
-  removeItem(item: ListItem){
-    this.cart.items = this.cart.items.filter(x => x.product.id !== item.product.id);
+  removeItem(item: ListItem) {
+    let cart = this.getCart();
+    cart.items = cart.items.filter(x => x.product.id !== item.product.id);
 
-    this.updateToTalItems()
-    this.updateToTalPrice()
+    this.cart$.next(cart);
   }
 
-  changeQuantity(item: ListItem, status: boolean){
-    if(status){
-      item.quantity++
-    } else {
-      if (item.quantity > 1) {
-        item.quantity--
+  changeQuantity(item: ListItem, status: boolean) {
+    let cart = this.getCart();
+    let itemFound = cart.items.find(x => x.product.id === item.product.id)
+
+    if (itemFound) {
+      if (status) {
+        itemFound.quantity++
       } else {
-        this.removeItem(item)
+        if (itemFound.quantity > 1) {
+          itemFound.quantity--
+        } else {
+          this.removeItem(itemFound)
+        }
       }
     }
 
-    this.updateToTalItems()
-    this.updateToTalPrice()
+    this.cart$.next(cart)
   }
 
 }

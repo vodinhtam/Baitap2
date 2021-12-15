@@ -31,9 +31,6 @@ export class CartMainComponent implements OnInit, OnDestroy {
   }
 
   onRemoveItem(item: ListItem) {
-  if (!confirm("Are you sure to remove this item?")) {
-        return
-      }
     this.cartService.removeItem(item);
   }
 

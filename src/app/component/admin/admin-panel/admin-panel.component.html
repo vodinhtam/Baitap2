@@ -31,7 +31,7 @@
               <td>{{i+1}}</td>
               <td>{{product.id}}</td>
               <td>{{product.name}}</td>
-              <td>{{product.price}}</td>
+              <td>{{product.price | vndCurrency}}</td>
               <td>
                 <button type="button" class="btn btn-danger" (click)="onRemoveProduct(product.id)">
                   Delete

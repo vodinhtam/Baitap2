@@ -25,7 +25,7 @@
             <button type="button" class="btn btn-info nav-link" id="cart-detail"
               (mouseenter)="$event.stopPropagation(); cartDrop.open();">
               <fa-icon [icon]="cartIcon"></fa-icon>
-              <span class="ml-2"><u>{{ numberOfItems }}</u> </span>
+              <span class="ml-2"> ({{ numberOfItems }})</span>
             </button>
             <!-- Dropdown cart menu -->
             <div ngbDropdownMenu aria-labelledby="cart-detail"  (mouseleave)="$event.stopPropagation(); cartDrop.close();">
@@ -45,8 +45,8 @@
                   </div>
                 </div>
               </ng-container>
-              <button ngbDropdownItem (click)="onSelectCart()" class="font-weight-bold small text-danger">Click for more
-                detail</button>
+              <button ngbDropdownItem (click)="onSelectCart()" class="font-weight-bold text-danger text-center"><u>Click for more
+                detail...</u></button>
             </div>
           </div>
         </div>

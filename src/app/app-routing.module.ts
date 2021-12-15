@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './component/home-page/home-page.component';
 import { LoginComponent } from './component/login/login.component';
-import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
-import { CreateProductComponent } from './admin/create-product/create-product.component';
+import { AdminPanelComponent } from './component/admin/admin-panel/admin-panel.component';
+import { CreateProductComponent } from './component/admin/create-product/create-product.component';
 
 const routes: Routes = [
   {

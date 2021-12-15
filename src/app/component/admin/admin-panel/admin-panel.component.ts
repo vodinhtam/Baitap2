@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { ProductService } from '../../../service/product.service';
 import { Account } from '../../../model/account.model';
 import { AccountService } from '../../../service/account.service';
+import { Product } from '../../../model/product.model';
 
 @Component({
   selector: 'app-admin-panel',
@@ -19,7 +20,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.add(this.accService.loginUser$.subscribe((logAcc) => this.loginUser = logAcc));
-    this.mappedProducts = this.formattedProducts();
+    this.subscription.add(this.productService.products$.subscribe((products) => this.mappedProducts = this.formattedProducts(products)));
   }
 
   ngOnDestroy(): void {
@@ -30,8 +31,8 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     return Object.keys(obj);
   }
 
-  formattedProducts(){
-    return this.productService.getFormattedProducts();
+  formattedProducts(products: Product[]){
+    return this.productService.getFormattedProducts(products);
   }
 
   onToggleViewList(){

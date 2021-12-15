@@ -10,40 +10,42 @@
     <div class="col-12">
       <table class="table table-striped">
         <thead class="thead-inverse">
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Image</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>SubTotal</th>
-            <th>Remove</th>
+          <tr class="text-center">
+            <th class="col-1">#</th>
+            <th class="col-2">Name</th>
+            <th class="col-2">Image</th>
+            <th class="col-2">Price</th>
+            <th class="col-2">Quantity</th>
+            <th class="col-2">SubTotal</th>
+            <th class="col-1">Action</th>
           </tr>
         </thead>
         <tbody class="text-center">
           <tr *ngFor="let item of cart.items; let i = index">
-            <td>
+            <td  class="col-1">
               {{i+1}}
             </td>
-            <td>
+            <td  class="col-2">
               {{item.product.name}}
             </td>
-            <td>
+            <td  class="col-2">
               <img src="{{item.product.imgUrl}}" alt="{{item.product.name}}" height="50px">
             </td>
-            <td>
+            <td  class="col-2">
               {{item.product.price | vndCurrency}}
             </td>
-            <td>
+            <td  class="col-2">
               <a type="button" (click)="onChangeQuantity(item, false)"><fa-icon [icon]="minusIcon"></fa-icon></a>
               {{item.quantity}}
               <a type="button" (click)="onChangeQuantity(item, true)"><fa-icon [icon]="plusIcon"></fa-icon></a>
             </td>
-            <td>
+            <td  class="col-2">
               {{(item.quantity * item.product.price) | vndCurrency}}
             </td>
-            <td>
-              <button class="btn btn-danger " (click)="onRemoveItem(item)">Delete</button>
+            <td  class="col-1">
+              <button class="btn btn-danger " (click)="onRemoveItem(item)">
+                <fa-icon [icon]="removeIcon"></fa-icon>
+              </button>
             </td>
           </tr>
           <tr class="mt-2">

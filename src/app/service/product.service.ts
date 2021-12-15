@@ -27,27 +27,29 @@ export class ProductService {
 
 // toàn bộ thao tác trên BehaviorSubject
 
-  getProduct(id: string) {
-    return this.products.find(x => x.id === id)
+  getProducts(){
+    return this.products$.getValue();
   }
 
-  //sửa lại
   addProduct(product: Product) {
-    this.products.push(product)
-    this.products$.next(this.products)
+    let updatedProducts = this.getProducts();
+    updatedProducts.push(product);
+
+    this.products$.next(updatedProducts);
   }
 
   removeProduct(productId: string) {
+    let updatedProducts = this.getProducts();
+
     //sử dụng khi remove các properties khác có value giống nhau
-    // this.products = this.products.filter(x => x.id !== productId);
+    // updatedProducts = updatedProducts.filter(x => x.id !== productId);
 
-    // const index = this.products.indexOf(this.products.find(x => x.id === productId))
-
-    const index = this.products.findIndex(x => x.id === productId);
+    const index = updatedProducts.findIndex(x => x.id === productId);
     if (index > -1) {
-      this.products.splice(index,1);
+      updatedProducts.splice(index,1);
     }
-    this.products$.next(this.products);
+    
+    this.products$.next(updatedProducts);
   }
 
   generateProductId(category: string) {
@@ -65,15 +67,8 @@ export class ProductService {
     return this.products$.pipe(map((data) => data.filter(x => !category ? true : x.category === category)))
   }
 
-  getListByCategory(cat: string){
-    if (cat) {
-      return this.products$.value.filter(x => x.category === cat);
-    }
-    return this.products$.value;
-  }
-
-  getFormattedProducts(){
-    return this.products.reduce((prev, now) => {
+  getFormattedProducts(products: Product[]){
+    return products.reduce((prev, now) => {
       if (!prev[now.category]) {
         prev[now.category] = [];
       }
