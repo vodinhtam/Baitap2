@@ -19,6 +19,7 @@ import { VndCurrencyPipe } from './pipes/vnd-currency.pipe';
 import { AdminPanelComponent } from './component/admin/admin-panel/admin-panel.component';
 import { CreateProductComponent } from './component/admin/create-product/create-product.component';
 import { ShortenTextPipe } from './pipes/shorten-text.pipe';
+import { RegisterComponent } from './component/register/register.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ShortenTextPipe } from './pipes/shorten-text.pipe';
     VndCurrencyPipe,
     AdminPanelComponent,
     CreateProductComponent,
-    ShortenTextPipe
+    ShortenTextPipe,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Account } from '../model/account.model';
-import { Router } from '@angular/router';
 import { BehaviorSubject,  } from 'rxjs';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,35 +9,56 @@ import { BehaviorSubject,  } from 'rxjs';
 export class AccountService {
   accounts: Account[] = [
     new Account('demo', 'demo', false),
+    new Account('demo1', 'demo', false),
     new Account('username', 'password', true)
   ]
-  loginUser$ = new BehaviorSubject<Account>(undefined)
 
-  constructor(private router: Router){}
+  accounts$ = new BehaviorSubject<Account[]>(this.accounts)
+  loginUser$ = new BehaviorSubject<Account>(null)
 
-  getAccount(username: string){
-    return this.accounts.find(x => x.username === username);
+  constructor(private cartService: CartService){}
+
+  getAccounts(){
+    return [...this.accounts$.getValue()];
   }
 
-  addAccount(acc: Account){
-    this.accounts.push(acc);
+  getAccount(username: string){
+    return this.getAccounts().find(x => x.username === username);
+  }
+
+  addAccount(username: string, password: string, isAdmin: boolean){
+    const newAcc = new Account(username, password, isAdmin);
+    const accounts = this.getAccounts();
+    
+    accounts.push(newAcc);
+    this.accounts$.next(accounts);
+    
+    //Khi add new account, tạo thêm 1 cart tương ứng
+    this.cartService.createNewCart(username);
   }
 
   checkAndPerformLogin(username: string, password: string){
-    let logAcc = this.accounts.find(x => x.username === username && x.password === password);
+    const logAcc = this.getAccounts().find(x => x.username === username && x.password === password);
 
     if(!logAcc){
       return false;
     } else {
-      
       this.loginUser$.next(logAcc);
-      this.router.navigate(['home']);
+      return true;
+    }
+  }
+
+  checkAndCreateNewAccount(username: string, password: string){
+    if (this.getAccount(username)) {
+      return false;
+    } else {
+      this.addAccount(username.toLowerCase(), password, false);
       return true;
     }
   }
 
   logOut(){
-    this.loginUser$.next(undefined);
+    this.loginUser$.next(null);
   }
 
 }

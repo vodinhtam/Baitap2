@@ -1,66 +1,115 @@
 import { Injectable } from '@angular/core';
 import { Cart } from '../model/cart.model';
 import { ListItem } from '../model/list-item.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  cart = new Cart('1', [])
+  private _carts: Cart[] = [
+    new Cart('demo', []),
+    new Cart('demo1', [])
+  ];
+  public carts$ = new BehaviorSubject<Cart[]>(this._carts);
 
-  public cart$ = new BehaviorSubject<Cart>(this.cart);
+  constructor(private router: Router) { }
 
-  constructor() { }
-
-  getCart() {
-    return this.cart$.getValue();
-  }
-  getSumPrice(cart: Cart) {
-    return cart.items.reduce((x, item) => x + (item.quantity * item.product.price), 0);
-  }
-
-  getSumItem(cart: Cart) {
-    return cart.items.reduce((x, { quantity }) => x + quantity, 0)
+  getCarts() {
+    return [...this.carts$.getValue()];
+    //? return Object.assign([],this.carts$.getValue())
   }
 
-  addItem(listItem: ListItem) {
-    let cart = this.getCart();
-    let itemFound = cart.items.find(x => x.product.id === listItem.product.id)
+  createNewCart(username: string) {
+    const carts = this.getCarts();
+    carts.push(new Cart(username, []));
+    this.carts$.next(carts);
 
-    if (itemFound) {
-      itemFound.quantity += listItem.quantity
-    } else {
-      this.cart.items.push(listItem);
-    }
-
-    this.cart$.next(cart);
+    //? this.carts$.next(this.getCarts().concat(new Cart('username', [])));
   }
 
-  removeItem(item: ListItem) {
-    let cart = this.getCart();
-    cart.items = cart.items.filter(x => x.product.id !== item.product.id);
+  addItem(username: string, listItem: ListItem) {
+    const carts = this.getCarts();
+    const cart = carts.find(data => data.username === username);
 
-    this.cart$.next(cart);
-  }
+    if (cart) {
+      const itemFound = cart.items.find(x => x.product.id === listItem.product.id);
 
-  changeQuantity(item: ListItem, status: boolean) {
-    let cart = this.getCart();
-    let itemFound = cart.items.find(x => x.product.id === item.product.id)
-
-    if (itemFound) {
-      if (status) {
-        itemFound.quantity++
+      if (itemFound) {
+        itemFound.quantity += listItem.quantity
       } else {
-        if (itemFound.quantity > 1) {
-          itemFound.quantity--
-        } else {
-          this.removeItem(itemFound)
-        }
+        cart.items.push(listItem);
+      }
+
+      this.carts$.next(carts);
+    } else {
+      if (confirm("You're not logged-in yet! Go to Login page?")) {
+        this.router.navigate(["login"]);
+      } else {
+        return;
       }
     }
+  }
 
-    this.cart$.next(cart)
+  removeItem(username: string, item: ListItem) {
+    const carts = this.getCarts();
+    const cart = carts.find(data => data.username === username);
+
+    if (cart) {
+      cart.items = cart.items.filter(x => x.product.id !== item.product.id);
+
+      this.carts$.next(carts);
+    } else {
+      if (confirm("You're not logged-in yet! Go to Login page?")) {
+        this.router.navigate(["login"]);
+      } else {
+        return;
+      }
+    }
+  }
+
+  changeQuantity(username: string, item: ListItem, status: boolean) {
+    const carts = this.getCarts();
+    const cart = carts.find(data => data.username === username);
+
+    if (cart) {
+      const itemFound = cart.items.find(x => x.product.id === item.product.id)
+
+      if (itemFound) {
+        if (status) {
+          itemFound.quantity++
+        } else {
+          if (itemFound.quantity > 1) {
+            itemFound.quantity--
+          } else {
+            cart.items = cart.items.filter(x => x.product.id !== itemFound.product.id);
+            // this.removeItem(itemFound) => this.cart$.next duplicated
+          }
+        }
+        this.carts$.next(carts);
+      } else {
+        alert('This item is not available!')
+      }
+    } else {
+      if (confirm("You're not logged-in yet! Go to Login page?")) {
+        this.router.navigate(["login"]);
+      } else {
+        return;
+      }
+    }
+  }
+
+  getObjPipe(username: string) {
+    return this.carts$.pipe(map(carts => {
+      const cart = carts.find(data => data.username === username);
+
+      return {
+        cart: cart,
+        sumPrice: cart.items.reduce((x, item) => x + (item.quantity * item.product.price), 0),
+        sumItem: cart.items.reduce((x, { quantity }) => x + quantity, 0)
+      }
+    }))
   }
 
 }

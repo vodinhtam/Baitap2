@@ -1,0 +1,64 @@
+<div id="register-form">
+  <h1 class="text-center text-primary">User Register</h1>
+  <div class="form-content">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div class="alert alert-danger" role="alert" *ngIf="errMessage">
+          {{errMessage}}
+        </div>
+        <hr>
+        <form (ngSubmit)="onRegister()" [formGroup]="regForm">
+          <div class="form-group">
+            <label for="username">Username :</label>
+            <input type="text" class="form-control" name="username" formControlName="username">
+            <small *ngIf="regForm.get('username').invalid && regForm.get('username').touched" class="text-danger">
+              <fa-icon [icon]="noticeIcon"></fa-icon>
+              <strong> Enter a valid username!</strong>
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="password">Password :</label>
+            <input type="password" class="form-control" name="password" formControlName="password" />
+            <small *ngIf="regForm.get('password').invalid && regForm.get('password').touched" class="text-danger">
+              <div *ngIf="regForm.get('password').errors['required']">
+                <fa-icon [icon]="noticeIcon"></fa-icon>
+                <strong> Enter password!</strong>
+              </div>
+              <div *ngIf="regForm.get('password').errors['minlength']">
+                <fa-icon [icon]="noticeIcon"></fa-icon>
+                <strong> Password's min length is 6!</strong>
+              </div>
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="cfpassword">Confirm Password :</label>
+            <input type="password" class="form-control" name="cfpassword" formControlName="cfpassword" />
+            <small *ngIf="regForm.get('cfpassword').invalid && regForm.get('cfpassword').touched" class="text-danger">
+              <div *ngIf="regForm.get('cfpassword').errors['required']">
+                <fa-icon [icon]="noticeIcon"></fa-icon>
+                <strong> Confirm password!</strong>
+              </div>
+              <div *ngIf="regForm.get('cfpassword').errors['confirmed']">
+                <fa-icon [icon]="noticeIcon"></fa-icon>
+                <strong> Those passwords didn't match. Try again!</strong>
+              </div>
+            </small>
+          </div>
+
+          <div class="row justify-content-center">
+            <button type="submit" class="btn btn-primary px-4 mr-3">Register</button>
+            <button type="reset" class="btn btn-success px-4 ml-3">Reset Form</button><br>
+          </div>
+          <hr>
+
+        </form>
+        <div class="row justify-content-center">
+          <a routerLink="/login">Already be our member? Click here to Login!</a>
+          <button type="submit" class="btn btn-info px-4 mt-4" routerLink="/index">Back to HomePage</button>
+        </div>
+
+        <br>
+      </div>
+    </div>
+  </div>
+</div>

@@ -20,17 +20,19 @@
             <small *ngIf="myForm.get('password').invalid && myForm.get('password').touched" class="text-danger">This
               field can't be left empty!</small>
           </div>
-          <p class="small text-secondary font-italic">Hint: username = username, password = password</p>
           <div class="row justify-content-center">
-            <button type="submit" class="btn btn-primary mr-3 px-4">Login</button><br>
+            <button type="submit" class="btn btn-primary px-4 mr-3">Login</button>
           </div>
           <hr>
 
         </form>
         <div class="row justify-content-center">
-          <button type="submit" class="btn btn-info px-4" routerLink="index">Back to HomePage</button>
+          <a routerLink="/register" class="d-block">New User? Click here to Register!</a>
         </div>
-        
+        <div class="row justify-content-center">
+          <button type="submit" class="btn btn-info px-4 mt-4" routerLink="/index">Back to HomePage</button>
+        </div>
+
         <br>
       </div>
     </div>

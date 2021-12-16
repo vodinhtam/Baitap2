@@ -25,7 +25,6 @@ export class ProductService {
 
   products$ = new BehaviorSubject<Product[]>(this.products);
 
-// toàn bộ thao tác trên BehaviorSubject
 
   getProducts(){
     return this.products$.getValue();
@@ -48,7 +47,7 @@ export class ProductService {
     if (index > -1) {
       updatedProducts.splice(index,1);
     }
-    
+    //data ko thay đổi ko cần update
     this.products$.next(updatedProducts);
   }
 

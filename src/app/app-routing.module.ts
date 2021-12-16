@@ -4,6 +4,7 @@ import { HomePageComponent } from './component/home-page/home-page.component';
 import { LoginComponent } from './component/login/login.component';
 import { AdminPanelComponent } from './component/admin/admin-panel/admin-panel.component';
 import { CreateProductComponent } from './component/admin/create-product/create-product.component';
+import { RegisterComponent } from './component/register/register.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: 'create-product',

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AccountService } from '../../service/account.service';
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { faCartPlus, faMinusSquare, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
@@ -29,14 +30,16 @@ export class NavBarComponent implements OnInit, OnDestroy {
   @Input() loginUser: Account;
 
 
-  constructor(private cartService: CartService, private accService: AccountService) { }
+  constructor(private cartService: CartService, private accService: AccountService, private router: Router) { }
 
   ngOnInit(): void {
-    this.subscription.add(this.cartService.cart$.subscribe((cart) => {
-      this.cart = cart
-      this.numberOfItems = this.cartService.getSumItem(cart);
-      this.sumPrice = this.cartService.getSumPrice(cart); 
-    }));
+    if (this.loginUser) {
+      this.subscription.add(this.cartService.getObjPipe(this.loginUser.username).subscribe((data) => {
+        this.cart = data.cart;
+        this.numberOfItems = data.sumItem;
+        this.sumPrice = data.sumPrice;
+      }));
+    }
   }
 
   ngOnDestroy(): void {
@@ -54,15 +57,16 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   onLogOut() {
     this.accService.logOut();
+    this.router.navigate(['login']);
   }
 
-  onChangeQuantity(item: ListItem, status: boolean){
+  onChangeQuantity(item: ListItem, status: boolean) {
     if (item.quantity === 1 && status === false) {
       if (!confirm("Are you sure to remove this items?")) {
         return;
       }
     }
-    this.cartService.changeQuantity(item, status);
+    this.cartService.changeQuantity(this.loginUser.username, item, status);
   }
 
 }
