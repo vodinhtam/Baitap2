@@ -5,12 +5,16 @@
 ></app-nav-bar>
 
 
-<div class="container mt-2">
+<div class="container mt-2 bg-white" style="border-radius: 15px; border: 1px solid #0143a3;">
     <ng-container *ngIf="displayContent === 'list'">
-        <app-product-list [categorySelected]=categorySelected ></app-product-list>
+        <div>
+            <app-product-list [categorySelected]=categorySelected ></app-product-list>
+        </div>
     </ng-container>
     <ng-container *ngIf="displayContent === 'cart'">
-        <app-cart-main></app-cart-main>
+        <div >
+            <app-cart-main></app-cart-main>
+        </div>
     </ng-container>
 </div>
 

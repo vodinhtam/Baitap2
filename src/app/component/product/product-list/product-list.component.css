@@ -1,12 +1,15 @@
-.my-item-name:hover{
-    cursor: pointer;
-    text-decoration: underline;
-    color: brown;
+.card {
+  border: none;
 }
-.card{
-    border: none;
+
+.my-card-body {
+  border: solid 2px rgb(245, 72, 72);
+  border-radius: 5px;
 }
-.my-card-body{
-    border: solid 2px rgb(245, 72, 72);
-    border-radius: 5px;
+
+.category-title {
+  border-bottom: none;
+  margin-bottom: 0px;
+  display: flex;
+  justify-content: end;
 }

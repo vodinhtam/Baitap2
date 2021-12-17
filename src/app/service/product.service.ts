@@ -10,7 +10,6 @@ export class ProductService {
   products: Product[] = [
     new Product('P1', 'Iphone X', 'Phone', 'https://cdn.tgdd.vn/Products/Images/42/114115/iphone-x-64gb-hh-600x600.jpg', 12000000),
     new Product('P2', 'Samsung Galaxy Fold3', 'Phone', 'https://cdn.tgdd.vn/Products/Images/42/226935/Slider/samsung-galaxy-z-fold-3-slider-tong-quan-1020x570.jpg', 41990000),
-    new Product('P4', 'Xiaomi 11T Pro', 'Phone', 'https://cdn.tgdd.vn/Products/Images/42/248218/xiaomi-11t-pro-blue-1-600x600.jpg', 14990000),
     new Product('P3', 'Điện thoại Vivo X70 Pro 5G', 'Phone', 'https://cdn.tgdd.vn/Products/Images/42/248099/vivo-x70-pro-xanh-1-1.jpg', 18990000),
     new Product('L1', 'Acer Nitro 5 Gaming AN515', 'Laptop', 'https://cdn.tgdd.vn/Products/Images/44/247243/acer-nitro-5-gaming-an515-57-727j-i7-nhqd9sv005-4.jpg', 28190000),
     new Product('L2', 'MacBook Pro 14 M1 Pro 2021', 'Laptop', 'https://cdn.tgdd.vn/Products/Images/44/253581/Slider/vi-vn-apple-pro-14-m1-pro-2021-8-core-cpu-16gb-1.jpg', 52990000),

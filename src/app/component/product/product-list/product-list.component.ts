@@ -3,6 +3,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
 import { Subscription } from 'rxjs';
 import { Product } from '../../../model/product.model';
+import { faAward } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-product-list',
@@ -10,6 +11,7 @@ import { Product } from '../../../model/product.model';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit, OnDestroy {
+  labelIcon = faAward;
   categoryList = ['Phone', 'Tablet', 'Laptop', 'SmartWatch']
   mappedProducts: {};
   keySets: string[] = [];

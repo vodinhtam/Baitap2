@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { AccountService } from '../../service/account.service';
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
-import { faCartPlus, faMinusSquare, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faBoxes, faCartPlus, faHome, faMinusSquare, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { CartService } from '../../service/cart.service';
 import { Subscription } from 'rxjs';
 import { Account } from '../../model/account.model';
@@ -23,6 +23,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   minusIcon = faMinusSquare;
   plusIcon = faPlusSquare;
+  homeIcon = faHome;
+  categoryIcon = faBoxes;
 
   @Output() displayContent = new EventEmitter<string>()
   @Output() categorySelected = new EventEmitter<string>()

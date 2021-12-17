@@ -20,6 +20,7 @@ import { AdminPanelComponent } from './component/admin/admin-panel/admin-panel.c
 import { CreateProductComponent } from './component/admin/create-product/create-product.component';
 import { ShortenTextPipe } from './pipes/shorten-text.pipe';
 import { RegisterComponent } from './component/register/register.component';
+import { ProductCarouselComponent } from './component/product/product-carousel/product-carousel.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { RegisterComponent } from './component/register/register.component';
     AdminPanelComponent,
     CreateProductComponent,
     ShortenTextPipe,
-    RegisterComponent
+    RegisterComponent,
+    ProductCarouselComponent
   ],
   imports: [
     BrowserModule,

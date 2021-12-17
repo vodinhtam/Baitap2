@@ -1,23 +1,24 @@
-<div class="row alert alert-success">
-  <div class="col-12">
-    <h2 class="text-center">
-      PRODUCTS LIST
-    </h2>
-  </div>
-</div>
 <ng-container *ngIf="!categorySelected; else hasCategorySelected">
+  <div class="row alert">
+    <div class="col-12">
+      <h2 class="text-center text-primary">
+        PRODUCTS LIST
+      </h2>
+    </div>
+  </div>
   <ng-container *ngFor="let key of keySets">
     <hr>
-    <div class="col-4" style="border: 1px solid red; border-bottom: none; margin-bottom: 0px;">
-      <div class="row alert alert-danger">
-        <div class="col-12">
-          <h3>
-            {{key}}
-          </h3>
+    <div class="category-title">
+      <div class="row badge badge-danger">
+        <div class="d-inline-block pb-3 px-3" style="transform: scale(1.8,1.8);">
+          <fa-icon [icon]="labelIcon"></fa-icon>
         </div>
+        <span class="h3 pr-3 py-4">
+          {{key}}
+        </span>
       </div>
     </div>
-    <div class="row" style="border: 1px solid red;">
+    <div class="row">
       <div class="col-4 card" *ngFor="let product of mappedProducts[key]">
         <div class="card-body">
           <div class="my-card-body">

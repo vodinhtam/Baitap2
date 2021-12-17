@@ -1,3 +1,7 @@
 button:hover{
     cursor: pointer;
 }
+#cover{
+    background-image: url(../assets/back.jpg);
+    min-height: 900px;
+}
