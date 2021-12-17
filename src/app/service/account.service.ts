@@ -14,7 +14,7 @@ export class AccountService {
   ]
 
   accounts$ = new BehaviorSubject<Account[]>(this.accounts)
-  loginUser$ = new BehaviorSubject<Account>(new Account('demo1', 'demo', false))
+  loginUser$ = new BehaviorSubject<Account>(null)
 
   constructor(private cartService: CartService){}
 

@@ -30,12 +30,13 @@ export class RegisterComponent implements OnInit {
 
 onRegister() {
   if (this.regForm.invalid) {
-    this.regForm.markAllAsTouched()
+    this.regForm.markAllAsTouched();
   } else {
       let data = this.regForm.getRawValue();
 
       if (!this.accService.checkAndCreateNewAccount(data.username, data.password)) {
         this.errMessage = "Register fail - Username existed!";
+        this.regForm.reset();
       } else {
         this.router.navigate(["login"]);
       }

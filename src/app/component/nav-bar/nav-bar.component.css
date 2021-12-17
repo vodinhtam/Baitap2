@@ -6,36 +6,52 @@
   border-radius: 9px;
 }
 
-::ng-deep .dropdown-menu { width: 300px; background-color: #97bbf1;}
-
-.nav-link{
-  border: 1px dotted #0143a3;
-  color: white !important; 
+::ng-deep .dropdown-menu {
+  width: 300px;
+  background-color: #97bbf1;
 }
-.nav-link:hover{
+
+.nav-link {
+  border: 1px dotted #0143a3;
+  color: white !important;
+}
+
+.nav-link:hover {
   cursor: pointer;
   border: 1px solid white;
   border-radius: 5px;
 }
-#welcome-user{
+
+#welcome-user {
   border: 1px dotted #0143a3;
-  color: white !important; 
+  color: white !important;
   padding: 0px 15px;
 }
-#cart-area{
+
+#cart-area {
   padding: 0px;
   margin-left: 200px !important;
   border-right: 3px solid white;
   padding-right: 25px;
 }
-.my-icons{
-  transform: scale(2,2);
+
+.my-icons {
+  transform: scale(2, 2);
   display: flex;
   justify-content: center;
   padding: 10px;
 }
-#my-cart-icon{
-  transform: scale(1.5,1.5);
+
+#my-cart-icon {
+  transform: scale(1.5, 1.5);
   display: flex;
   justify-content: center;
+}
+
+header {
+  margin: 13px auto;
+  border-top-left-radius: 13px;
+  border-top-right-radius: 13px;
+  background: #0143a3;
+  height: 100px;
 }

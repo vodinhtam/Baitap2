@@ -1,5 +1,4 @@
-<header class="navbar navbar-expand navbar-dark px-4 flex-column flex-md-row"
-  style="background: #0143a3; height: 100px;">
+<header class="navbar navbar-expand navbar-dark px-4 flex-column flex-md-row">
   <div class="navbar-nav-scroll">
     <ul class="navbar-nav flex-row">
       <li class="nav-item">
@@ -26,7 +25,7 @@
           </div>
         </div>
       </li>
-      
+
     </ul>
   </div>
   <ul class="social-buttons navbar-nav flex-row ml-md-auto d-none d-md-flex align-items-center">
@@ -38,7 +37,7 @@
             <a class="nav-link" id="cart-detail" (mouseenter)="$event.stopPropagation(); cartDrop.open();">
               <div id="my-cart-icon">
                 <fa-icon [icon]="cartIcon"></fa-icon>
-              <span class="ml-2"> <strong>({{ numberOfItems }})</strong></span>
+                <span class="ml-2"> <strong>({{ numberOfItems }})</strong></span>
               </div>
             </a>
             <!-- Dropdown cart menu -->
@@ -60,8 +59,7 @@
                   </div>
                 </div>
               </ng-container>
-              <button ngbDropdownItem (click)="onSelectCart()"
-                class="font-weight-bold text-danger text-center"><u>Click
+              <button ngbDropdownItem (click)="onSelectCart()" class="font-weight-bold text-danger text-center"><u>Click
                   for more
                   detail...</u></button>
             </div>
@@ -73,7 +71,13 @@
       </li>
     </ng-container>
     <ng-container *ngIf="!loginUser; else hasLoggedin">
-      <a class="nav-link" routerLinkActive="active" routerLink="/login"><strong>LOGIN</strong></a>
+
+      <a class="nav-link" routerLinkActive="active" routerLink="/login">
+        <div class="my-icons">
+          <fa-icon [icon]="loginIcon"></fa-icon>
+        </div>
+        <strong>LOGIN</strong>
+      </a>
     </ng-container>
   </ul>
 </header>
@@ -86,6 +90,7 @@
         <a class="nav-link mt-2" style="cursor: pointer;" routerLink="/admin">Go to Admin panel</a>
       </ng-container>
     </a><br>
-    <a class="badge badge-warning float-right mt-2 mr-3" style="cursor: pointer;" (click)="onLogOut()"><strong>LOGOUT</strong></a>
+    <a class="badge badge-warning float-right mt-2 mr-3" style="cursor: pointer;"
+      (click)="onLogOut()"><strong>LOGOUT</strong></a>
   </li>
 </ng-template>

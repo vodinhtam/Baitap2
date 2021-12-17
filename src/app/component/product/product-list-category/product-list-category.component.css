@@ -6,3 +6,8 @@
   border: solid 2px rgb(245, 72, 72);
   border-radius: 5px;
 }
+
+hr{
+  border: 1px solid #0143a3;
+  background-color: #0143a3;
+}

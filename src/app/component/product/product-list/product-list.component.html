@@ -1,11 +1,5 @@
 <ng-container *ngIf="!categorySelected; else hasCategorySelected">
-  <div class="row alert">
-    <div class="col-12">
-      <h2 class="text-center text-primary">
-        PRODUCTS LIST
-      </h2>
-    </div>
-  </div>
+  <app-product-carousel></app-product-carousel>
   <ng-container *ngFor="let key of keySets">
     <hr>
     <div class="category-title">

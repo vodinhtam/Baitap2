@@ -1,25 +1,26 @@
+<br>
 <div id="register-form">
-  <h1 class="text-center text-primary">User Register</h1>
+  <h1 class="text-center">User Register</h1>
   <div class="form-content">
     <div class="row">
       <div class="col-md-8 mx-auto">
-        <div class="alert alert-danger" role="alert" *ngIf="errMessage">
+        <div class="alert alert-whitetext-white" role="alert" *ngIf="errMessage">
           {{errMessage}}
         </div>
         <hr>
         <form (ngSubmit)="onRegister()" [formGroup]="regForm">
           <div class="form-group">
-            <label for="username">Username :</label>
+            <label for="username">Username</label>
             <input type="text" class="form-control" name="username" formControlName="username">
-            <small *ngIf="regForm.get('username').invalid && regForm.get('username').touched" class="text-danger">
+            <small *ngIf="regForm.get('username').invalid && regForm.get('username').touched" class="text-white">
               <fa-icon [icon]="noticeIcon"></fa-icon>
               <strong> Enter a valid username!</strong>
             </small>
           </div>
           <div class="form-group">
-            <label for="password">Password :</label>
+            <label for="password">Password</label>
             <input type="password" class="form-control" name="password" formControlName="password" />
-            <small *ngIf="regForm.get('password').invalid && regForm.get('password').touched" class="text-danger">
+            <small *ngIf="regForm.get('password').invalid && regForm.get('password').touched" class="text-white">
               <div *ngIf="regForm.get('password').errors['required']">
                 <fa-icon [icon]="noticeIcon"></fa-icon>
                 <strong> Enter password!</strong>
@@ -31,9 +32,9 @@
             </small>
           </div>
           <div class="form-group">
-            <label for="cfpassword">Confirm Password :</label>
+            <label for="cfpassword">Confirm Password</label>
             <input type="password" class="form-control" name="cfpassword" formControlName="cfpassword" />
-            <small *ngIf="regForm.get('cfpassword').invalid && regForm.get('cfpassword').touched" class="text-danger">
+            <small *ngIf="regForm.get('cfpassword').invalid && regForm.get('cfpassword').touched" class="text-white">
               <div *ngIf="regForm.get('cfpassword').errors['required']">
                 <fa-icon [icon]="noticeIcon"></fa-icon>
                 <strong> Confirm password!</strong>
@@ -45,19 +46,26 @@
             </small>
           </div>
 
-          <div class="row justify-content-center">
-            <button type="submit" class="btn btn-primary px-4 mr-3">Register</button>
-            <button type="reset" class="btn btn-success px-4 ml-3">Reset Form</button><br>
+          <div class="row justify-content-center my-4">
+            <button type="submit" class="btn btn-warning px-4 mr-3 border-white"><strong>Register</strong></button>
+            <button type="reset" class="btn btn-success px-4 ml-3 border-white"><strong>Reset Form</strong></button><br>
           </div>
           <hr>
 
         </form>
         <div class="row justify-content-center">
-          <a routerLink="/login">Already be our member? Click here to Login!</a>
-          <button type="submit" class="btn btn-info px-4 mt-4" routerLink="/index">Back to HomePage</button>
+          <a routerLink="/login" class="text-white">Already be our member? Click here to Login!</a>
         </div>
 
-        <br>
+        <div class="col-md-12 ">
+          <div class="login-or">
+            <hr class="hr-or">
+            <span class="span-or">or</span>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <a routerLink="/index" class="d-block text-white font-italic">Back to Homepage</a>
+        </div>
       </div>
     </div>
   </div>

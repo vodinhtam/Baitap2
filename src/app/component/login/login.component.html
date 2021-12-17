@@ -1,5 +1,6 @@
+<br>
 <div id="login-form">
-  <h2 class="text-center text-primary">User Login</h2>
+  <h1 class="text-center text-white">User Login</h1>
   <div class="form-content">
     <div class="row">
       <div class="col-md-8 mx-auto">
@@ -9,30 +10,39 @@
         <hr>
         <form (ngSubmit)="onLogin()" [formGroup]="myForm">
           <div class="form-group">
-            <label for="username">Username :</label>
+            <label for="username" class="text-white">Username</label>
             <input type="text" class="form-control" name="username" formControlName="username" />
-            <small *ngIf="myForm.get('username').invalid && myForm.get('username').touched" class="text-danger">Please
-              enter a valid username!</small>
+            <small *ngIf="myForm.get('username').invalid && myForm.get('username').touched" class="text-white">
+              <fa-icon [icon]="noticeIcon"></fa-icon>
+              <strong> Enter a valid username!</strong>
+            </small>
           </div>
           <div class="form-group">
-            <label for="password">Password :</label>
+            <label for="password" class="text-white">Password</label>
             <input type="password" class="form-control" name="password" formControlName="password" />
-            <small *ngIf="myForm.get('password').invalid && myForm.get('password').touched" class="text-danger">This
-              field can't be left empty!</small>
+            <small *ngIf="myForm.get('password').invalid && myForm.get('password').touched" class="text-white">
+                <fa-icon [icon]="noticeIcon"></fa-icon>
+                <strong> Enter password!</strong>
+            </small>
           </div>
           <div class="row justify-content-center">
-            <button type="submit" class="btn btn-primary px-4 mr-3">Login</button>
+            <button type="submit" class="btn btn-warning px-4 mr-3"><strong>Login</strong></button>
           </div>
           <hr>
 
         </form>
         <div class="row justify-content-center">
-          <a routerLink="/register" class="d-block">New User? Click here to Register!</a>
+          <a routerLink="/register" class="d-block text-white font-italic">New User? Click here to Register!</a>
         </div>
+        <div class="col-md-12 ">
+          <div class="login-or">
+             <hr class="hr-or">
+             <span class="span-or">or</span>
+          </div>
+       </div>
         <div class="row justify-content-center">
-          <button type="submit" class="btn btn-info px-4 mt-4" routerLink="/index">Back to HomePage</button>
+          <a routerLink="/index" class="d-block text-white font-italic">Back to Homepage</a>
         </div>
-
         <br>
       </div>
     </div>

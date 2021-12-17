@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { AccountService } from '../../service/account.service';
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
-import { faBoxes, faCartPlus, faHome, faMinusSquare, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faBoxes, faCartPlus, faHome, faMinusSquare, faPlusSquare, faUser } from '@fortawesome/free-solid-svg-icons';
 import { CartService } from '../../service/cart.service';
 import { Subscription } from 'rxjs';
 import { Account } from '../../model/account.model';
@@ -14,27 +14,31 @@ import { Cart } from '../../model/cart.model';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit, OnDestroy {
-  cartIcon = faCartPlus;
+  loginUser: Account;
   subscription = new Subscription();
-
+  
   numberOfItems = 0;
   cart: Cart;
   sumPrice = 0;
-
+  
+  cartIcon = faCartPlus;
   minusIcon = faMinusSquare;
   plusIcon = faPlusSquare;
   homeIcon = faHome;
   categoryIcon = faBoxes;
+  loginIcon = faUser;
 
   @Output() displayContent = new EventEmitter<string>()
   @Output() categorySelected = new EventEmitter<string>()
 
-  @Input() loginUser: Account;
 
 
   constructor(private cartService: CartService, private accService: AccountService, private router: Router) { }
 
   ngOnInit(): void {
+    this.subscription.add(this.accService.loginUser$.subscribe(data => {
+      this.loginUser = data;
+    }))
     if (this.loginUser) {
       this.subscription.add(this.cartService.getObjPipe(this.loginUser.username).subscribe((data) => {
         this.cart = data.cart;
