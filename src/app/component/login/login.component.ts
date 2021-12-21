@@ -29,10 +29,8 @@ export class LoginComponent implements OnInit {
       this.myForm.markAllAsTouched();
     } else {
       const data = this.myForm.getRawValue();
-
       if (!this.accountService.checkAndPerformLogin(data.username, data.password)) {
         this.loginErr = "Fail to login, wrong username or password!";
-        this.myForm.reset();
       } else {
         this.router.navigate(['index']);
       }

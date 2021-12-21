@@ -34,20 +34,17 @@ export class SelectQuantityComponent implements OnInit, OnDestroy{
       this.subscription.unsubscribe();
   }
   
-  onChangeQty(x: boolean){
-    if(x){
-      this.quantity += 1;
+  onChangeQty(status: boolean){
+    if(status){
+      this.quantity++;
     } else {
-      if (this.quantity !== 1) {
-        this.quantity -= 1
-      }
+      this.quantity--;
     }
   }
 
   onAddItem(){
-    this.cartService.addItem(this.loginUser, new ListItem(this.product, this.quantity))
-    // alert('Added to list ' + this.quantity + ' item"' + this.product.name + '"')
-    this.quantity = 1
+    this.cartService.addItem(this.loginUser, new ListItem(this.product, this.quantity));
+    this.quantity = 1;
   }
 
 }

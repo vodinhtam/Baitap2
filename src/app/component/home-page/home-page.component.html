@@ -1,12 +1,29 @@
 <div class="container bg-white" style="border-radius: 15px; border: 1px solid #0143a3;">
-  <app-nav-bar (displayContent)="displayContent = $event" (categorySelected)="categorySelected = $event">
+  <app-nav-bar 
+    (displayContent)="displayContent = $event" 
+    (categorySelected)="categorySelected = $event"
+  >
   </app-nav-bar>
+
   <ng-container *ngIf="displayContent === 'list'">
-    <app-product-list [categorySelected]=categorySelected></app-product-list>
+    <app-product-list 
+      [categorySelected]=categorySelected
+    >
+    </app-product-list>
   </ng-container>
   <ng-container *ngIf="displayContent === 'cart'">
-    <app-cart-main></app-cart-main>
+    <app-cart-main 
+      (displayCheckout)="displayContent='checkOut'"
+    >
+    </app-cart-main>
   </ng-container>
+  <ng-container *ngIf="displayContent === 'checkOut'">
+    <app-check-out 
+      (displayList)="displayContent='list'"
+    >
+    </app-check-out>
+  </ng-container>
+
   <div id="my-footer">
     <hr>
     This website was built on Angular Webapp - created by TamVD2!

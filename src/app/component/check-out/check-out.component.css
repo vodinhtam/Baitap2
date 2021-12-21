@@ -1,0 +1,6 @@
+#checkout-form{
+    font-weight: 700;
+}
+input.ng-invalid.ng-touched{
+    border: solid 1px red;
+}

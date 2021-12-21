@@ -13,7 +13,7 @@ import { ProductListCategoryComponent } from './component/product/product-list-c
 import { CartMainComponent } from './component/cart-main/cart-main.component';
 import { ProductListComponent } from './component/product/product-list/product-list.component';
 import { NavBarComponent } from './component/nav-bar/nav-bar.component';
-import { SelectQuantityComponent } from './shared/select-quantity/select-quantity.component';
+import { SelectQuantityComponent } from './component/select-quantity/select-quantity.component';
 import { LoginComponent } from './component/login/login.component';
 import { VndCurrencyPipe } from './pipes/vnd-currency.pipe';
 import { AdminPanelComponent } from './component/admin/admin-panel/admin-panel.component';
@@ -21,6 +21,8 @@ import { CreateProductComponent } from './component/admin/create-product/create-
 import { ShortenTextPipe } from './pipes/shorten-text.pipe';
 import { RegisterComponent } from './component/register/register.component';
 import { ProductCarouselComponent } from './component/product/product-carousel/product-carousel.component';
+import { CheckOutComponent } from './component/check-out/check-out.component';
+import { OrderManagerComponent } from './component/order-manager/order-manager.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ProductCarouselComponent } from './component/product/product-carousel/p
     CreateProductComponent,
     ShortenTextPipe,
     RegisterComponent,
-    ProductCarouselComponent
+    ProductCarouselComponent,
+    CheckOutComponent,
+    OrderManagerComponent
   ],
   imports: [
     BrowserModule,

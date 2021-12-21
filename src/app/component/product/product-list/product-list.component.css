@@ -10,8 +10,6 @@
 .category-title {
   border-bottom: none;
   margin-bottom: 0px;
-  display: flex;
-  justify-content: end;
 }
 
 hr{

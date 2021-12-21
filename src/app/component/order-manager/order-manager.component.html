@@ -1,0 +1,50 @@
+<br>
+<div id="my-container">
+  <nav ngbNav #nav="ngbNav" class="nav-tabs my-nav-tabs">
+    <ng-container ngbNavItem>
+      <a ngbNavLink class="nav-tab-title">ON-GOING ORDERS</a>
+      <ng-template ngbNavContent>
+        <ng-container *ngIf="loginUser.orders.length > 0; else noOrders">
+          <table class="table table-striped">
+            <thead>
+              <tr class="text-center">
+                <th>#</th>
+                <th>Id</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Delivery Address</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let order of loginUser.orders; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{order.id}}</td>
+                  <td>{{order.sumItem}} item(s)</td>
+                  <td>{{order.sumPrice | vndCurrency}}</td>
+                  <td>{{order.deliverTo}}</td>
+                </tr>
+              </tbody>
+          </table>
+          <hr>
+          </ng-container>
+      </ng-template>
+    </ng-container>
+    <ng-container ngbNavItem>
+      <a ngbNavLink class="nav-tab-title">DELIVERED/CANCELLED ORDERS</a>
+      <ng-template ngbNavContent>
+        <p>Nothing here.</p>
+      </ng-template>
+    </ng-container>
+  </nav>
+
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+  <div class="row justify-content-end">
+    <a routerLink="/index" class="d-block text-primary font-italic mt-3 mr-3">Back to Homepage</a>
+  </div>
+</div>
+
+
+<ng-template #noOrders>
+  <p class="p-2">You haven't made any order yet! Let's shopping!</p>
+</ng-template>

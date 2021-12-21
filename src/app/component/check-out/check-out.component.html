@@ -1,0 +1,37 @@
+<br>
+<div id="checkout-form">
+  <h1 class="text-center">Check Out Cart</h1>
+  <div class="form-content">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <hr>
+        <form (ngSubmit)="onCheckOut()" [formGroup]="checkOutForm">
+          <div class="form-group">
+            <label for="sumItems">Total Quantity</label>
+            <input type="text" class="form-control" name="sumItems" formControlName="sumItems" [attr.disabled]="true">
+          </div>
+          <div class="form-group">
+            <label for="sumPrice">Total Payment</label>
+            <input type="text" class="form-control" name="sumPrice" formControlName="sumPrice" [attr.disabled]="true">
+          </div>
+          <div class="form-group">
+            <label for="deliverTo">Delivery address</label>
+            <input type="text" class="form-control" name="deliverTo" formControlName="deliverTo" />
+            <small *ngIf="checkOutForm.get('deliverTo').invalid && checkOutForm.get('deliverTo').touched"
+              class="text-danger">
+              <fa-icon [icon]="noticeIcon"></fa-icon>
+              <strong> Enter the address where your order will be delivered to!</strong>
+            </small>
+          </div>
+
+          <div class="row justify-content-center my-4">
+            <button type="submit" class="btn btn-warning px-4 mr-3 border-white"><strong>Check Out!</strong></button>
+            <button type="button" class="btn btn-success px-4 ml-3 border-white" (click)="onGoToHomePage()"><strong>Back to
+                HomePage</strong></button><br>
+          </div>
+          <hr>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

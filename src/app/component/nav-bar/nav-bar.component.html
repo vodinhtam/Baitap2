@@ -86,11 +86,25 @@
   <li class="nav-item">
     <a class="h4 pt-2 ml-3" id="welcome-user">
       <strong>WELCOME <span class="text-warning">{{loginUser.username}}</span></strong>
-      <ng-container *ngIf="loginUser.isAdmin">
-        <a class="nav-link mt-2" style="cursor: pointer;" routerLink="/admin">Go to Admin panel</a>
-      </ng-container>
     </a><br>
-    <a class="badge badge-warning float-right mt-2 mr-3" style="cursor: pointer;"
-      (click)="onLogOut()"><strong>LOGOUT</strong></a>
+    <div class="row justify-content-center">
+      <div class="d-inline-block mx-3" id="order-area">
+        <ng-container *ngIf="!loginUser.isAdmin">
+          <a class="badge badge-warning mt-2" id="my-order" style="cursor: pointer;" routerLink="/order-manager">
+            <strong>MY ORDERS</strong>
+          </a>
+        </ng-container>
+        <ng-container *ngIf="loginUser.isAdmin">
+          <a class="badge badge-warning mt-2" style="cursor: pointer;" routerLink="/admin">Go to Admin panel</a>
+        </ng-container>
+      </div>
+      <div>
+        <a class="badge badge-warning float-right mt-2" style="cursor: pointer;"
+          (click)="onLogOut()"><strong>LOGOUT</strong></a>
+      </div>
+    </div>
   </li>
+</ng-template>
+<ng-template #noOrders>
+  <p class="p-2">You haven't made any order yet! Let's shopping!</p>
 </ng-template>

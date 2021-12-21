@@ -8,7 +8,7 @@
 
 ::ng-deep .dropdown-menu {
   width: 300px;
-  background-color: #97bbf1;
+  background-color: #b9d0f1;
 }
 
 .nav-link {
@@ -54,4 +54,15 @@ header {
   border-top-right-radius: 13px;
   background: #0143a3;
   height: 100px;
+}
+
+.order-group{
+  background-color: aliceblue;
+}
+.order-group-item{
+  padding: 0px 5px;
+  border-top: 1px dotted #0143a3;
+  border-right: 1px dotted #0143a3;
+  display: flex;
+  justify-content: space-between;
 }

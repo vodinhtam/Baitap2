@@ -22,10 +22,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.subscription.add(this.productService.products$.subscribe(
-      products => this.mappedProducts = this.formattedProducts(products)
-    ))
-    this.keySets = this.objectKey(this.mappedProducts);
+    this.subscription.add(this.productService.products$.subscribe(products => {
+      this.mappedProducts = this.formattedProducts(products);
+      this.keySets = this.objectKey(this.mappedProducts);
+    }))
   }
 
   ngOnDestroy(): void {

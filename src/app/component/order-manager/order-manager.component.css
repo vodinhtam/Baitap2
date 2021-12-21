@@ -1,0 +1,32 @@
+#my-container {
+  width: 80%;
+  margin: 30px auto;
+  border: solid 2px rgb(146, 146, 209);
+  padding: 50px 20px;
+  border-radius: 20px;
+  background-color: white;
+  font-weight: 700;
+}
+.nav-tab-title{
+    width: 400px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    font-size: larger;
+}
+.my-nav-tabs{
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #0143A3;
+}
+.nav-item{
+    color: #0143A3;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.nav-item.active{
+    color: white;
+    background-color: #0143A3;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}

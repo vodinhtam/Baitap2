@@ -1,0 +1,12 @@
+.my-icons{
+    color: rgb(218, 30, 17);
+    transform: scale(2,2);
+    margin: 2px 20px 0px 20px;
+    background-color: white;
+    border: none;
+    padding-bottom: 0px;
+}
+
+button:disabled{
+    color: rgb(179, 164, 164);
+}

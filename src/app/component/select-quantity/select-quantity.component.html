@@ -1,13 +1,14 @@
-<div class="row my-2">
+<div class="row my-2 pb-2">
   <div class="col-7">
     <div class="row justify-content-center mt-1 ml-3">
-      <div class="my-icons" (click)="onChangeQty(false)" [class.text-secondary]="quantity === 1 ? true: false">
+      <button type="button" class="my-icons" (click)="onChangeQty(false)" 
+        [disabled]="quantity < 2" >
         <fa-icon [icon]="iconBack"></fa-icon>
-      </div>
-      <h5>{{ quantity }}</h5>
-      <div class="my-icons" (click)="onChangeQty(true)">
+      </button>
+      <h5 class="mb-0">{{ quantity }}</h5>
+      <button type="button" class="my-icons" (click)="onChangeQty(true)">
         <fa-icon [icon]="iconForward"></fa-icon>
-      </div>
+      </button>
     </div>
   </div>
   <div class="col-5">

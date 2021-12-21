@@ -1,19 +1,27 @@
+<br>
 <ng-container *ngIf="loginUser!== undefined && loginUser.isAdmin; else elseBlock">
   <div class="container mt-3">
-    <button type="button" class="btn btn-outline-info" routerLink="/index">
-      View Home-page
-    </button>
-    <hr>
-    <button type="button" class="btn btn-outline-info" routerLink="/create-product">Create new product</button>
-    <hr>
-    <button type="button" class="btn btn-outline-info" (click)="onToggleViewList()">
-      {{!viewListToggle ? 'Show Product List' : 'Hide Product List'}}
-    </button>
+    <div class="row justify-content-between px-3">
+      <button type="button" class="btn my-btn" routerLink="/index">
+        View Home-page
+      </button>
+      <button type="button" class="btn my-btn" routerLink="/create-product">
+        Create new product
+      </button>
+      <button type="button" class="btn my-btn" (click)="onToggleViewList()">
+        {{!viewListToggle ? 'Show Product List' : 'Hide Product List'}}
+      </button>
+      <button type="button" class="btn my-btn" >
+        Show User's Statistic
+        <!-- function not available yet! -->
+      </button>
+    </div>
     <hr>
 
     <ng-container *ngIf="viewListToggle">
+      <h1 class="text-success text-center my-4"><strong>PRODUCT LIST BY CATEGORY</strong></h1>
       <div *ngFor="let category of objectKey(mappedProducts)">
-        <div class="alert alert-primary col-md-3" role="alert">
+        <div class="alert alert-danger offset-4 col-md-4 text-center border-danger" role="alert">
           <h3>{{category}}</h3>
         </div>
         <table class="table table-light">
@@ -48,7 +56,7 @@
 
 <ng-template #elseBlock>
   <div class="container justify-content-center mt-4">
-      <h2 class="my-4">Sorry! This page can only be accessed by administrator!</h2>
-  <button type="button" class="btn btn-primary" routerLink="/index">Back to home page</button>
+    <h2 class="my-4">Sorry! This page can only be accessed by administrator!</h2>
+    <button type="button" class="btn btn-primary" routerLink="/index">Back to home page</button>
   </div>
 </ng-template>

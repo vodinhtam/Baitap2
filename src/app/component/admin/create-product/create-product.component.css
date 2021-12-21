@@ -1,3 +1,14 @@
 form .ng-invalid.touched{
     border: solid 1px red;
 }
+
+.my-container{
+    width: 80%;
+    margin: 50px auto;
+    border: solid 2px rgb(146, 146, 209);
+    padding: 50px 0px;
+    border-radius: 20px;
+    background-color: #0143A3;
+    font-weight: bold;
+    color: white;
+}

@@ -21,8 +21,8 @@
             <label for="password" class="text-white">Password</label>
             <input type="password" class="form-control" name="password" formControlName="password" />
             <small *ngIf="myForm.get('password').invalid && myForm.get('password').touched" class="text-white">
-                <fa-icon [icon]="noticeIcon"></fa-icon>
-                <strong> Enter password!</strong>
+              <fa-icon [icon]="noticeIcon"></fa-icon>
+              <strong> Enter password!</strong>
             </small>
           </div>
           <div class="row justify-content-center">
@@ -36,10 +36,10 @@
         </div>
         <div class="col-md-12 ">
           <div class="login-or">
-             <hr class="hr-or">
-             <span class="span-or">or</span>
+            <hr class="hr-or">
+            <span class="span-or">or</span>
           </div>
-       </div>
+        </div>
         <div class="row justify-content-center">
           <a routerLink="/index" class="d-block text-white font-italic">Back to Homepage</a>
         </div>

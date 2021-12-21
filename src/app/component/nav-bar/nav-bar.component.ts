@@ -75,4 +75,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.cartService.changeQuantity(this.loginUser.username, item, status);
   }
 
+  onViewOrder(){
+    
+    alert(this.loginUser.orders.forEach(x => x))
+  }
+
 }

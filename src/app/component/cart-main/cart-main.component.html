@@ -1,12 +1,12 @@
 <div class="container mt-3">
-  <div class="row alert">
-    <div class="col-12">
-      <h2 class="text-center text-primary">
-        CART'S LIST ITEM
-      </h2>
+  <ng-container>
+    <div class="row alert">
+      <div class="col-12">
+        <h2 class="text-center text-primary">
+          CART'S LIST ITEM
+        </h2>
+      </div>
     </div>
-  </div>
-  <ng-container *ngIf="cart.items.length !== 0; else noProduct">
     <div class="col-12">
       <table class="table table-striped">
         <thead class="thead-inverse">
@@ -22,50 +22,50 @@
         </thead>
         <tbody class="text-center">
           <tr *ngFor="let item of cart.items; let i = index">
-            <td  class="col-1">
+            <td class="col-1">
               {{i+1}}
             </td>
-            <td  class="col-2">
+            <td class="col-2">
               {{item.product.name}}
             </td>
-            <td  class="col-2">
+            <td class="col-2">
               <img src="{{item.product.imgUrl}}" alt="{{item.product.name}}" height="50px">
             </td>
-            <td  class="col-2">
+            <td class="col-2">
               {{item.product.price | vndCurrency}}
             </td>
-            <td  class="col-2">
-              <a type="button" (click)="onChangeQuantity(item, false)"><fa-icon [icon]="minusIcon"></fa-icon></a>
+            <td class="col-2">
+              <a type="button" (click)="onChangeQuantity(item, false)">
+                <fa-icon [icon]="minusIcon"></fa-icon>
+              </a>
               {{item.quantity}}
-              <a type="button" (click)="onChangeQuantity(item, true)"><fa-icon [icon]="plusIcon"></fa-icon></a>
+              <a type="button" (click)="onChangeQuantity(item, true)">
+                <fa-icon [icon]="plusIcon"></fa-icon>
+              </a>
             </td>
-            <td  class="col-2">
+            <td class="col-2">
               {{(item.quantity * item.product.price) | vndCurrency}}
             </td>
-            <td  class="col-1">
+            <td class="col-1">
               <button class="btn btn-danger " (click)="onRemoveItem(item)">
                 <fa-icon [icon]="removeIcon"></fa-icon>
               </button>
             </td>
           </tr>
           <tr class="mt-2">
-            <td colspan="4">
-              <h3>Total:</h3>
-            </td>
             <td colspan="3">
-              <h3>{{ totalPrice | vndCurrency }}</h3>
+              <h3 class="p-3">Total:</h3>
+            </td>
+            <td colspan="2">
+              <h3 class="p-3">{{ totalPrice | vndCurrency }}</h3>
+            </td>
+            <td colspan="2">
+              <h3 id="check-out" (click)="onDisplayCheckout()">Check out</h3>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-
   </ng-container>
-
-  <ng-template #noProduct>
-    <div class="alert alert-primary" role="alert">
-      <h4 class="alert-heading">There's no product in the list!</h4>
-    </div>
-  </ng-template>
   <br>
 </div>

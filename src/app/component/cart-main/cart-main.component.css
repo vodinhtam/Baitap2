@@ -8,3 +8,13 @@
     text-decoration: underline;
     color: rgb(59, 137, 240);
 }   
+#check-out{
+    color: red;
+    padding: 15px;
+    border: 2px none white;
+}
+#check-out:hover{
+    border: 2px solid red;
+    border-radius: 10px;
+    cursor: pointer;
+}

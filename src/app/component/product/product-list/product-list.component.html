@@ -22,8 +22,8 @@
             <div class="text-center">
               <img src="{{product.imgUrl}}" alt="{{product.name}}" height="120px">
             </div>
-            <hr>
             <h5 class="text-center my-3">Price: {{product.price | vndCurrency}}</h5>
+            <hr>
             <app-select-quantity [product]="product"></app-select-quantity>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter} from '@angular/core';
 import { Cart } from '../../model/cart.model';
 import { CartService } from '../../service/cart.service';
 import { ListItem } from '../../model/list-item.model';
@@ -14,11 +14,15 @@ import { AccountService } from '../../service/account.service';
 export class CartMainComponent implements OnInit, OnDestroy {
   cart: Cart;
   totalPrice: number;
+  loginUser: string;
+  subscription = new Subscription();
+
+  @Output() displayCheckout = new EventEmitter<void>();
+
+  
   plusIcon = faPlusSquare;
   minusIcon = faMinusSquare;
   removeIcon = faTrashAlt;
-  subscription = new Subscription();
-  loginUser: string;
 
   constructor(private cartService: CartService, private accService: AccountService) { }
 
@@ -26,9 +30,9 @@ export class CartMainComponent implements OnInit, OnDestroy {
     this.subscription.add(this.accService.loginUser$.subscribe(data => {
       this.loginUser = data.username;
     }));
-    this.subscription.add(this.cartService.getObjPipe(this.loginUser).subscribe(obj => {
-      this.cart = obj.cart;
-      this.totalPrice = obj.sumPrice;
+    this.subscription.add(this.cartService.carts$.subscribe(carts => {
+      this.cart = this.cartService.getCart(this.loginUser, carts);
+      this.totalPrice = this.cartService.getSumPrice(this.loginUser, carts);
     }))
 
   }
@@ -46,10 +50,13 @@ export class CartMainComponent implements OnInit, OnDestroy {
   onChangeQuantity(item: ListItem, status: boolean) {
     if (item.quantity === 1 && status === false) {
       if (!confirm("Are you sure to remove this item?")) {
-        return
+        return;
       }
     }
     this.cartService.changeQuantity(this.loginUser, item, status);
   }
 
+  onDisplayCheckout(){
+    this.displayCheckout.emit();
+  }
 }

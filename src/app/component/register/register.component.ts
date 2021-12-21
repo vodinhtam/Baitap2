@@ -36,7 +36,7 @@ onRegister() {
 
       if (!this.accService.checkAndCreateNewAccount(data.username, data.password)) {
         this.errMessage = "Register fail - Username existed!";
-        this.regForm.reset();
+        // this.regForm.reset();
       } else {
         this.router.navigate(["login"]);
       }

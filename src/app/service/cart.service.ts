@@ -18,7 +18,6 @@ export class CartService {
 
   getCarts() {
     return [...this.carts$.getValue()];
-    //? return Object.assign([],this.carts$.getValue())
   }
 
   createNewCart(username: string) {
@@ -27,6 +26,15 @@ export class CartService {
     this.carts$.next(carts);
 
     //? this.carts$.next(this.getCarts().concat(new Cart('username', [])));
+  }
+
+  setCartToEmpty(username: string){
+    const carts = this.getCarts();
+    const currentCart = carts.find(x => x.username === username)
+    if (currentCart) {
+      currentCart.items = [];
+      this.carts$.next(carts);
+    }
   }
 
   addItem(username: string, listItem: ListItem) {
@@ -46,8 +54,6 @@ export class CartService {
     } else {
       if (confirm("You're not logged-in yet! Go to Login page?")) {
         this.router.navigate(["login"]);
-      } else {
-        return;
       }
     }
   }
@@ -63,9 +69,7 @@ export class CartService {
     } else {
       if (confirm("You're not logged-in yet! Go to Login page?")) {
         this.router.navigate(["login"]);
-      } else {
-        return;
-      }
+      } 
     }
   }
 
@@ -94,22 +98,48 @@ export class CartService {
     } else {
       if (confirm("You're not logged-in yet! Go to Login page?")) {
         this.router.navigate(["login"]);
-      } else {
-        return;
-      }
+      } 
     }
   }
 
   getObjPipe(username: string) {
     return this.carts$.pipe(map(carts => {
       const cart = carts.find(data => data.username === username);
-
+      let sumPrice = 0;
+      let sumItem = 0;
+      if (cart) {
+        sumPrice = cart.items.reduce((x, item) => x + (item.quantity * item.product.price), 0),
+        sumItem = cart.items.reduce((x, { quantity }) => x + quantity, 0)
+      }
       return {
         cart: cart,
-        sumPrice: cart.items.reduce((x, item) => x + (item.quantity * item.product.price), 0),
-        sumItem: cart.items.reduce((x, { quantity }) => x + quantity, 0)
+        sumPrice: sumPrice,
+        sumItem: sumItem
       }
+      //có cần thiết return cả 3 ? => tách riêng 3 hàm ở dưới (getObjPipe là gì???)
     }))
+  }
+
+  getCart(username: string, carts: Cart[]){
+    return carts.find(cart => cart.username === username);
+  }
+
+  getSumItem(username: string, carts: Cart[]){
+    const cart = carts.find(cart => cart.username === username);
+    if (cart) {
+      return cart.items.reduce((x, { quantity }) => x + quantity, 0);
+    } else {
+      return 0;
+    }
+  }
+
+  getSumPrice(username: string, carts: Cart[]){
+    const cart = carts.find(cart => cart.username === username);
+    if (cart) {
+      return cart.items.reduce((x, item) => x + (item.quantity * item.product.price), 0);
+    } else {
+      return 0;
+    }
   }
 
 }
